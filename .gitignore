@@ -1,3 +1,5 @@
 /Sample Code
 lab4/data
 /data
+*venv
+*.pyc
