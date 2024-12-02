@@ -3,7 +3,7 @@
 import numpy as np
 import webbrowser
 import socketio
-from lab5.agent_Q_learning import LunarLanderAgent  # Ensure this is the correct class of your trained agent
+from agent_DQN import Agent  # Ensure this is the correct class of your trained agent
 
 # Configuration
 SERVER_URL = 'http://srv-cad.ece.mcmaster.ca:65000'  # Server URL
@@ -134,9 +134,8 @@ if __name__ == '__main__':
         print("Error: TEAM_NAME and TEAM_SECRET_CODE must be set in the script.")
         exit(1)
 
-    agent = LunarLanderAgent()  # Ensure this is the correct class of your trained agent
-    agent.epsilon = 0
-    agent_model_file = 'best_model_157.pkl'  # Set the trained agent's model file name
+    agent = Agent(state_size=8, action_size=4, seed=0)  # Ensure this is the correct class of your trained agent
+    agent_model_file = "checkpoint_lunar_298_55.pth"  # Set the trained agent's model file name
 
     # Load the trained model
     print("loading Agent...")

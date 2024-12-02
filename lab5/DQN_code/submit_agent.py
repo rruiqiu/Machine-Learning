@@ -3,7 +3,7 @@
 import numpy as np
 import webbrowser
 import socketio
-from lab5.agent_Q_learning import LunarLanderAgent  # Ensure this is the correct class of your trained agent
+from Agent import LunarLanderAgent  # Ensure this is the correct class of your trained agent
 
 # Configuration
 SERVER_URL = 'http://srv-cad.ece.mcmaster.ca:65000'  # Server URL
@@ -135,13 +135,13 @@ if __name__ == '__main__':
         exit(1)
 
     agent = LunarLanderAgent()  # Ensure this is the correct class of your trained agent
-    agent.epsilon = 0
-    agent_model_file = 'best_model_157.pkl'  # Set the trained agent's model file name
+
+    agent_model_file = "best_model.pth"  # Set the trained agent's model file name
 
     # Load the trained model
     print("loading Agent...")
     agent.load_agent(agent_model_file)
-    
+    agent.epsilon = 0.0
     # Submit the solution
     print("Submitting the solution...")
     submission = AgentSubmission(agent)

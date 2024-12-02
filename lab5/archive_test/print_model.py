@@ -17,5 +17,5 @@ def load_agent(file_name):
   print(q_table)
   # print(iht)
   
-agent_model_file = r'C:\Users\Richard\Documents\4SL4\Machine-Learning\lab5\model.pkl'  # Set the model file name
+agent_model_file = r'C:\Users\Richard\Documents\4SL4\Machine-Learning\lab5\best_model.pkl'  # Set the model file name
 load_agent(agent_model_file)
