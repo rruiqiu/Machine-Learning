@@ -117,12 +117,14 @@ class LunarLanderAgent():
 
     expected_state_action_values = (next_state_values * self.gamma) + reward_batch
 
+    # The Huber loss acts like the mean squared error when the error is small, but like the mean absolute error when the error is large
     criterion = nn.SmoothL1Loss()
     loss = criterion(state_action_values, expected_state_action_values.unsqueeze(1))
 
-
+    #Clears any gradients stored from previous optimization steps to prevent accumulation.
     self.optimizer.zero_grad()
     loss.backward()
+    #max gradient threshold -100,100 to prevent instability
     torch.nn.utils.clip_grad_value_(self.policy_net.parameters(), 100)
     self.optimizer.step()    
     
@@ -203,12 +205,12 @@ class LunarLanderAgent():
 if __name__ == '__main__':
 
     agent = LunarLanderAgent()       # Initialize the agent
-    # agent.load_agent('best_model.pth')
-    # agent.epsilon = 0.01
-    # agent.epsilon_min = 0.001
-    # agent.epsilon_decay = 0.998
-    # agent.train(300.0)
+    agent.load_agent(r'C:\Users\Richard\Documents\4SL4\Machine-Learning\lab5\DQN_code\best_model.pth')
+    agent.epsilon = 0.01
+    agent.epsilon_min = 0.001
+    agent.epsilon_decay = 0.998
+    agent.train(300.0)
     
-    agent.load_agent('best_model.pth')
-    agent.epsilon = 0.0
-    print("test average",agent.test())
+    # agent.load_agent('best_model.pth')
+    # agent.epsilon = 0.0
+    # print("test average",agent.test())

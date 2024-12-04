@@ -16,7 +16,7 @@ class LunarLanderAgent:
         self.num_actions = self.env.action_space.n
         # self.alpha = 0.1 / self.state_discretizer.num_tilings
         self.alpha = 0.1 / self.state_discretizer.num_tilings
-        self.gamma = 0.99
+        self.gamma = 0.99 #discount factor
         self.epsilon = 1.0
         self.epsilon_decay = 0.9
         self.epsilon_min = 0.01
