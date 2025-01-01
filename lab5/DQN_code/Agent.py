@@ -6,6 +6,7 @@ import torch.optim as optim
 from collections import namedtuple, deque
 import random
 import gymnasium as gym
+import imageio
 # ref: https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html#q-network
 class DQN(nn.Module):
     def __init__(self, n_observations, n_actions):
@@ -202,15 +203,39 @@ class LunarLanderAgent():
       avg_reward = np.mean(total_rewards)
       print(f"Test Average reward over {num_episodes} episodes: {avg_reward:.4f}")
       return avg_reward    
+    
+  def display(self, num_episodes=1,gif_filename="lunar_lander.gif"):
+
+    # agent.qnetwork_local.load_state_dict(torch.load(filename, weights_only=True))
+    frames = []  # To store frames for GIF creation
+    for episode in range(num_episodes):
+      self.env = gym.make("LunarLander-v3", render_mode="rgb_array")  
+      state, _ = self.env.reset()
+      done = False
+      episode_reward = 0
+
+      while not done:
+          frames.append(self.env.render())  # Capture the frame
+          action = self.select_action(state)  # Exploit only
+          next_state, reward, terminated, truncated, _ = self.env.step(action)
+          state = next_state
+          episode_reward += reward
+          done = terminated or truncated
+          
+      imageio.mimsave(gif_filename, frames, fps=30)  # Save at 30 FPS
+
+ 
+  
 if __name__ == '__main__':
 
     agent = LunarLanderAgent()       # Initialize the agent
-    agent.load_agent(r'C:\Users\Richard\Documents\4SL4\Machine-Learning\lab5\DQN_code\best_model.pth')
-    agent.epsilon = 0.01
-    agent.epsilon_min = 0.001
-    agent.epsilon_decay = 0.998
-    agent.train(300.0)
+    # agent.load_agent(r'C:\Users\Richard\Documents\4SL4\Machine-Learning\lab5\DQN_code\best_model.pth')
+    # agent.epsilon = 0.01
+    # agent.epsilon_min = 0.001
+    # agent.epsilon_decay = 0.998
+    # agent.train(300.0)
     
-    # agent.load_agent('best_model.pth')
-    # agent.epsilon = 0.0
+    agent.load_agent('best_model.pth')
+    agent.epsilon = 0.0
     # print("test average",agent.test())
+    print("display",agent.display())
