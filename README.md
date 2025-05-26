@@ -14,3 +14,7 @@ Built a neural network from scratch with backpropagation training, then reimplem
 
 ### lab5 – Reinforcement Learning Hackathon 2024
 Developed and trained reinforcement learning agents in the Lunar Lander environment using Q-Learning and Deep Q-Networks (DQN).
+
+Demo:
+
+<video src="lunar_lander.mp4"></video>
