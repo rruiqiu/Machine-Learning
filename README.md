@@ -17,4 +17,4 @@ Developed and trained reinforcement learning agents in the Lunar Lander environm
 
 Demo:
 
-<video src="lunar_lander.mp4"></video>
+![lunar_lander](README.assets/lunar_lander.gif)
